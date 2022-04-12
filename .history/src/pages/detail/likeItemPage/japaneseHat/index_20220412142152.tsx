@@ -81,7 +81,7 @@ const japaneseHat = () => {
         })
     }
     return (
-        <div style={{ backgroundColor: 'rgb(234,232,235)', width: '100%', height: '600px' }}>
+        <div style={{ backgroundColor: 'rgb(234,232,235)', width: '100%', height: '3000px' }}>
             <div>
                 <div className={styles.menu} id='top'>
                     <Menu mode="horizontal" >

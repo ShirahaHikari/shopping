@@ -89,11 +89,11 @@ app.get('/user', async (req, res) => {
 app.post('/addShop', async (req, res) => {
   // console.log(req.body)
   const userShop = new UserShop({
-    name: req.body.userName,
+    name: req.body.username,
     item: req.body.item,
     count: req.body.count,
   })
-  userShop.save(function (err) {
+  userInfo.save(function (err) {
     if (err) {
       res.send('Error')
       return

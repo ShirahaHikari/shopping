@@ -24,7 +24,6 @@ const dataSchema = new mongoose.Schema({
   item: String,
   count: Number,
 })
-const UserShop = mongoose.model('userShop', dataSchema)
 const UserInfo = mongoose.model('userInfo', userSchema)
 const User = mongoose.model('user',useSchema)
 app.use(cors())
@@ -81,21 +80,6 @@ app.get('/user', async (req, res) => {
     console.log(result)
     if(result==null){
       res.send('failed')
-      return
-    }
-    res.send('success')
-  })
-})
-app.post('/addShop', async (req, res) => {
-  // console.log(req.body)
-  const userShop = new UserShop({
-    name: req.body.userName,
-    item: req.body.item,
-    count: req.body.count,
-  })
-  userShop.save(function (err) {
-    if (err) {
-      res.send('Error')
       return
     }
     res.send('success')

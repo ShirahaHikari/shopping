@@ -17,10 +17,9 @@ import {
 import axios from 'axios'
 import styles from './index.less'
 
-let userInfo = window.sessionStorage.getItem('userInfo')
-console.log(userInfo)
 const { SubMenu } = Menu
 const japaneseHat = () => {
+    let userInfo = window.sessionStorage.getItem('userInfo')
     let user
     if (userInfo == null) {
         message.error('你没有登录！')
@@ -32,7 +31,7 @@ const japaneseHat = () => {
     }
     let [count, setCount] = useState(1);
     let userShop = {
-        userName: user?.username,
+        userName: user?.userName,
         item: '帽子男女春夏太阳帽防晒遮脸遮阳2021新款鸭舌帽',
         count: count,
     }
@@ -66,7 +65,6 @@ const japaneseHat = () => {
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
-                console.log(userShop)
                 axios.post('http://localhost:3000/addShop', userShop).then(function (res) {
                     if (res.status === 200) {
                         message.success('加入购物车成功！')
@@ -81,7 +79,7 @@ const japaneseHat = () => {
         })
     }
     return (
-        <div style={{ backgroundColor: 'rgb(234,232,235)', width: '100%', height: '600px' }}>
+        <div style={{ backgroundColor: 'rgb(234,232,235)', width: '100%', height: '3000px' }}>
             <div>
                 <div className={styles.menu} id='top'>
                     <Menu mode="horizontal" >
