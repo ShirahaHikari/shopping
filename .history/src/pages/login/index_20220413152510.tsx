@@ -5,7 +5,6 @@ import React from 'react';
 import loginPage from './index.css'
 import axios from 'axios'
 import { useModel } from 'umi';
-// TODO: 登录权鉴
 
 
 const LoginPage = () => {
@@ -16,9 +15,11 @@ const LoginPage = () => {
             if(res.status === 200){
                 if(res.data === 'success'){
                     message.success('登录成功')
-                    setInitialState(values)
-                    console.log(values)
-                    // window.location.href = '/home'
+                    setInitialState({userName:values.username})
+                    setUserData(values.username,values.password)
+                    window.sessionStorage.setItem('userInfo',JSON.stringify(values))
+                    axios.post('http://localhost:3000/user',values)
+                    window.location.href = '/home'
                 }else{
                     message.error('用户名不存在或密码错误')
                     return
@@ -87,6 +88,13 @@ const LoginPage = () => {
                             }}
                         >
                             注册
+                        </Button>
+                        <Button type="primary" style={{left:'10px'}}
+                            onClick = {function(){
+                                window.location.href = '/managerLogin'
+                            }}
+                        >
+                            我是管理员
                         </Button>
                     </Form.Item>
                 </Form>

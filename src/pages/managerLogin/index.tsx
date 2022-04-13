@@ -5,19 +5,25 @@ import React from 'react';
 import loginPage from './index.css'
 import axios from 'axios'
 import { useModel } from 'umi';
-// TODO: 登录权鉴
 
 
-const LoginPage = () => {
+const ManagerLoginPage = () => {
     const { user, setUserData } = useModel('user') 
     const {initialState,setInitialState} = useModel('@@initialState')
     const onFinish = (values: any) => {
+        if(values.keyword !== '032711'){
+            message.error('管理员权钥错误！')
+            return;
+        }
         axios.post('http://localhost:3000/loginUser',values).then(function(res){
             if(res.status === 200){
                 if(res.data === 'success'){
                     message.success('登录成功')
                     setInitialState({userName:values.username})
-                    window.location.href = '/home'
+                    setUserData(values.username,values.password)
+                    window.sessionStorage.setItem('userInfo',JSON.stringify(values))
+                    axios.post('http://localhost:3000/user',values)
+                    window.location.href = '/managerHome'
                 }else{
                     message.error('用户名不存在或密码错误')
                     return
@@ -76,9 +82,17 @@ const LoginPage = () => {
                         <Input.Password />
                     </Form.Item>
 
-                    <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
+                    <Form.Item
+                        label="管理员权钥"
+                        name="keyword"
+                        rules={[{ required: true, message: '请输入管理员权钥！' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item wrapperCol={{ offset: 15, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                            提交
+                            登录
                         </Button>
                         <Button type="primary" style={{left:'10px'}}
                             onClick = {function(){
@@ -86,6 +100,13 @@ const LoginPage = () => {
                             }}
                         >
                             注册
+                        </Button>
+                        <Button type="primary" style={{left:'20px'}}
+                            onClick = {function(){
+                                window.location.href = '/'
+                            }}
+                        >
+                            我不是管理员
                         </Button>
                     </Form.Item>
                 </Form>
@@ -104,4 +125,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         });
     },
 })
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ManagerLoginPage)

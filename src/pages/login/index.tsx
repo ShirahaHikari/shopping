@@ -78,9 +78,9 @@ const LoginPage = () => {
                         <Input.Password />
                     </Form.Item>
 
-                    <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 15, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                            提交
+                            登录
                         </Button>
                         <Button type="primary" style={{left:'10px'}}
                             onClick = {function(){
@@ -88,6 +88,13 @@ const LoginPage = () => {
                             }}
                         >
                             注册
+                        </Button>
+                        <Button type="primary" style={{left:'20px'}}
+                            onClick = {function(){
+                                window.location.href = '/managerLogin'
+                            }}
+                        >
+                            我是管理员
                         </Button>
                     </Form.Item>
                 </Form>
