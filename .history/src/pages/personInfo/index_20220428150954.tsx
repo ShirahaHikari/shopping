@@ -673,7 +673,6 @@ class PersonalInfo extends React.Component<any, any> {
                     <Table id="userAdvise" columns={this.state.columnsAdvise} dataSource={this.state.userAdvise}></Table>)}
                 {(this.state.buyRecordFlag && <Table id="buyRecord" columns={this.state.columnsBuyRecord} scroll={{ x: 2000 }} dataSource={this.state.userBuyRecord}></Table>)}
                 {(this.state.receivedFormFlag && <Table id="received" columns={this.state.columnsReceived} dataSource={this.state.userReceived}></Table>)}
-                <div id='bottom'></div>
             </div >
         )
     }

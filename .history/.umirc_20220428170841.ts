@@ -44,10 +44,7 @@ export default defineConfig({
     { path: '/computer/noteBook', component: '@/pages/kindPages/noteBookComputer'},//分类 笔记本电脑
     { path: '/food/snack', component: '@/pages/kindPages/snack'},//分类 零食
     { path: '/food/beer', component: '@/pages/kindPages/beer'},//分类 啤酒
-    { path: '/food/seafood', component: '@/pages/kindPages/seafood'},//分类 生鲜
-    { path: '/clothes/socks', component: '@/pages/kindPages/sock'},//分类 袜子
-    { path: '/clothes/pants', component: '@/pages/kindPages/pants'},//分类 裤子
-    { path: '/clothes/jacket', component: '@/pages/kindPages/jacket'},//分类 上衣
+
   ],
   fastRefresh: {},
   proxy:{

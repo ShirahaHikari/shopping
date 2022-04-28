@@ -270,7 +270,7 @@ app.get('/getUserReceived', async (req, res) => {
 })
 app.post('/updateUserReceived', async (req, res) => {
   let id = req.body.id
-  UserBuyRecord.updateOne({_id:ObjectId(id)},{$set:{'received':true}}).then(result=>{
+  UserAdvise.updateOne({_id:ObjectId(id)},{$set:{'received':true}}).then(result=>{
     // console.log(result)
     if(result==null){
       res.send('failed')

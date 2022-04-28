@@ -40,14 +40,8 @@ export default defineConfig({
     { path: '/managerUserShop', component: '@/pages/managerPage/userShopInfo'}, //管理员的用户购买商品页面
     { path: '/managerUserAdvise', component: '@/pages/managerPage/userAdvise'}, //管理员的用户评价消息页面
     //以上为用户管理页面
-    { path: '/computer/deskTop', component: '@/pages/kindPages/desktopComputer'},//分类 台式电脑
-    { path: '/computer/noteBook', component: '@/pages/kindPages/noteBookComputer'},//分类 笔记本电脑
-    { path: '/food/snack', component: '@/pages/kindPages/snack'},//分类 零食
-    { path: '/food/beer', component: '@/pages/kindPages/beer'},//分类 啤酒
-    { path: '/food/seafood', component: '@/pages/kindPages/seafood'},//分类 生鲜
-    { path: '/clothes/socks', component: '@/pages/kindPages/sock'},//分类 袜子
-    { path: '/clothes/pants', component: '@/pages/kindPages/pants'},//分类 裤子
-    { path: '/clothes/jacket', component: '@/pages/kindPages/jacket'},//分类 上衣
+    { path: '/computer/deskTop', component: '@/pages/kindPages/desktopComputer'},//注册页面
+
   ],
   fastRefresh: {},
   proxy:{

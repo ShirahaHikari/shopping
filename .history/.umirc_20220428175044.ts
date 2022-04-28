@@ -47,7 +47,6 @@ export default defineConfig({
     { path: '/food/seafood', component: '@/pages/kindPages/seafood'},//分类 生鲜
     { path: '/clothes/socks', component: '@/pages/kindPages/sock'},//分类 袜子
     { path: '/clothes/pants', component: '@/pages/kindPages/pants'},//分类 裤子
-    { path: '/clothes/jacket', component: '@/pages/kindPages/jacket'},//分类 上衣
   ],
   fastRefresh: {},
   proxy:{

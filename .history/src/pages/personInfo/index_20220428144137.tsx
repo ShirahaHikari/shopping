@@ -25,17 +25,13 @@ class PersonalInfo extends React.Component<any, any> {
             userAdvise: [],
             userBuyRecord: [],
             userReceived: [],
-            buyRecordFlag: false,
-            receivedFormFlag: false,
+            buyRecordFlag: true,
+            receivedFormFlag: true,
             shopTableFlag: true,
             userAdviseForm: false,
             buttonVisible: false,
             formFlag: false,
             columnsAdvise: [{
-                title: '用户评论记录',
-                dataIndex: 'title',
-                key: 'title',
-            }, {
                 title: '用户名称',
                 dataIndex: 'name',
                 key: 'name',
@@ -162,7 +158,7 @@ class PersonalInfo extends React.Component<any, any> {
                                         axios.get('http://localhost:3000/getUserReceived').then((tmp) => {
                                             if (tmp.status === 200) {
                                                 let res1 = tmp.data[0]
-                                                this.setState({ userReceived: res1 })
+                                                this.setState({ userAdvise: res1 })
                                             }
                                         }).catch((err) => {
                                             message.error('因服务器原因无法获得签收状态清单！')
@@ -507,29 +503,21 @@ class PersonalInfo extends React.Component<any, any> {
                         top?.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
                     }}><div style={{ width: '80px' }}>回到顶部↑</div></a>)}
                     {(this.state.buttonVisible && <a onClick={() => {
-                        let shopTable = document.getElementById('shopTable')
-                        shopTable?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                        let like = document.getElementById('like')
+                        like?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
                     }}><div style={{ width: '80px' }}>购物车</div></a>)}
                     {(this.state.buttonVisible && <a onClick={() => {
-                        let buyRecord = document.getElementById('buyRecord')
-                        buyRecord?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>购买记录</div></a>)}
+                        let like = document.getElementById('like')
+                        like?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                    }}><div style={{ width: '80px' }}>已经购买</div></a>)}
                     {(this.state.buttonVisible && <a onClick={() => {
-                        let received = document.getElementById('received')
-                        received?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                        let like = document.getElementById('like')
+                        like?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
                     }}><div style={{ width: '80px' }}>签收状态</div></a>)}
-                    {(this.state.buttonVisible && <a onClick={() => {
-                        let userAdvise = document.getElementById('userAdvise')
-                        userAdvise?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>用户评论</div></a>)}
-                    {(this.state.buttonVisible && <a onClick={() => {
-                        let addAdvise = document.getElementById('addAdvise')
-                        addAdvise?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>新建评论</div></a>)}
                     {(this.state.buttonVisible && <a onClick={() => {
                         let bottom = document.getElementById('bottom')
                         bottom?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>滑到底部↓</div></a>)}
+                    }}><div style={{ width: '80px' }}>滑到底部</div></a>)}
                 </div>
                 <div className={styles.menu} id='top'>
                     <Menu selectedKeys={['mail']} mode="horizontal" >
@@ -595,18 +583,8 @@ class PersonalInfo extends React.Component<any, any> {
                         </Menu.Item>
                         <Menu.Item key="logOut" icon={<ClearOutlined />} style={{ width: 150 }}>
                             <a onClick={() => {
-                                Modal.confirm({
-                                    title: '你确定要退出登录吗？',
-                                    onOk: () => {
-                                        window.sessionStorage.removeItem('userInfo')
-                                        window.location.href = '/'
-                                    },
-                                    onCancel: () => {
-                                        return;
-                                    },
-                                    okText: '确认',
-                                    cancelText: '取消',
-                                })
+                                window.sessionStorage.removeItem('userInfo')
+                                window.location.href = '/'
                             }}>
                                 账号登出
                             </a>
@@ -617,7 +595,6 @@ class PersonalInfo extends React.Component<any, any> {
                     </Menu>
                 </div>
                 <div style={{ float: 'left', marginTop: '-20px', marginBottom: '20px' }}>
-                    <div className={styles.option}>注：<span>用户可点击以下按钮进行列表的显示与隐藏</span></div>
                     <Button onClick={() => {
                         this.setState({ formFlag: !this.state.formFlag })
                     }} style={{ marginRight: '5px' }}>新增评论</Button>
@@ -635,12 +612,11 @@ class PersonalInfo extends React.Component<any, any> {
                     }}>用户评论列表</Button>
                 </div>
                 {(this.state.shopTableFlag &&
-                    <Table id="shopTable" columns={this.state.columns} dataSource={this.state.dataShop}></Table>)}
+                    <Table columns={this.state.columns} dataSource={this.state.dataShop}></Table>)}
 
                 {this.state.formFlag &&
                     <div style={{ float: 'left', width: '1000px', top: '50px' }}>
                         <Form
-                            id="addAdvise"
                             name="basic"
                             labelCol={{ span: 7 }}
                             wrapperCol={{ span: 10 }}
@@ -670,10 +646,9 @@ class PersonalInfo extends React.Component<any, any> {
                     </div>
                 }
                 {(this.state.userAdviseForm &&
-                    <Table id="userAdvise" columns={this.state.columnsAdvise} dataSource={this.state.userAdvise}></Table>)}
-                {(this.state.buyRecordFlag && <Table id="buyRecord" columns={this.state.columnsBuyRecord} scroll={{ x: 2000 }} dataSource={this.state.userBuyRecord}></Table>)}
-                {(this.state.receivedFormFlag && <Table id="received" columns={this.state.columnsReceived} dataSource={this.state.userReceived}></Table>)}
-                <div id='bottom'></div>
+                    <Table columns={this.state.columnsAdvise} dataSource={this.state.userAdvise}></Table>)}
+                {(this.state.buyRecordFlag && <Table columns={this.state.columnsBuyRecord} scroll={{ x: 2000 }} dataSource={this.state.userBuyRecord}></Table>)}
+                {(this.state.receivedFormFlag && <Table columns={this.state.columnsReceived} dataSource={this.state.userReceived}></Table>)}
             </div >
         )
     }

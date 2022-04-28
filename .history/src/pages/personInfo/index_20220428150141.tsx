@@ -35,7 +35,7 @@ class PersonalInfo extends React.Component<any, any> {
                 title: '用户评论记录',
                 dataIndex: 'title',
                 key: 'title',
-            }, {
+            },{
                 title: '用户名称',
                 dataIndex: 'name',
                 key: 'name',
@@ -519,17 +519,9 @@ class PersonalInfo extends React.Component<any, any> {
                         received?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
                     }}><div style={{ width: '80px' }}>签收状态</div></a>)}
                     {(this.state.buttonVisible && <a onClick={() => {
-                        let userAdvise = document.getElementById('userAdvise')
-                        userAdvise?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>用户评论</div></a>)}
-                    {(this.state.buttonVisible && <a onClick={() => {
-                        let addAdvise = document.getElementById('addAdvise')
-                        addAdvise?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>新建评论</div></a>)}
-                    {(this.state.buttonVisible && <a onClick={() => {
                         let bottom = document.getElementById('bottom')
                         bottom?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                    }}><div style={{ width: '80px' }}>滑到底部↓</div></a>)}
+                    }}><div style={{ width: '80px' }}>滑到底部</div></a>)}
                 </div>
                 <div className={styles.menu} id='top'>
                     <Menu selectedKeys={['mail']} mode="horizontal" >
@@ -595,18 +587,8 @@ class PersonalInfo extends React.Component<any, any> {
                         </Menu.Item>
                         <Menu.Item key="logOut" icon={<ClearOutlined />} style={{ width: 150 }}>
                             <a onClick={() => {
-                                Modal.confirm({
-                                    title: '你确定要退出登录吗？',
-                                    onOk: () => {
-                                        window.sessionStorage.removeItem('userInfo')
-                                        window.location.href = '/'
-                                    },
-                                    onCancel: () => {
-                                        return;
-                                    },
-                                    okText: '确认',
-                                    cancelText: '取消',
-                                })
+                                window.sessionStorage.removeItem('userInfo')
+                                window.location.href = '/'
                             }}>
                                 账号登出
                             </a>
@@ -670,10 +652,9 @@ class PersonalInfo extends React.Component<any, any> {
                     </div>
                 }
                 {(this.state.userAdviseForm &&
-                    <Table id="userAdvise" columns={this.state.columnsAdvise} dataSource={this.state.userAdvise}></Table>)}
+                    <Table columns={this.state.columnsAdvise} dataSource={this.state.userAdvise}></Table>)}
                 {(this.state.buyRecordFlag && <Table id="buyRecord" columns={this.state.columnsBuyRecord} scroll={{ x: 2000 }} dataSource={this.state.userBuyRecord}></Table>)}
                 {(this.state.receivedFormFlag && <Table id="received" columns={this.state.columnsReceived} dataSource={this.state.userReceived}></Table>)}
-                <div id='bottom'></div>
             </div >
         )
     }

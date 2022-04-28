@@ -268,17 +268,6 @@ app.get('/getUserReceived', async (req, res) => {
     res.send([result])
   })
 })
-app.post('/updateUserReceived', async (req, res) => {
-  let id = req.body.id
-  UserBuyRecord.updateOne({_id:ObjectId(id)},{$set:{'received':true}}).then(result=>{
-    // console.log(result)
-    if(result==null){
-      res.send('failed')
-      return
-    }
-    res.send('success')
-  })
-})
 app.post('/addShop', async (req, res) => {
   // console.log(req.body)
   const userShop = new UserShop({
